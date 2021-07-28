@@ -1,15 +1,14 @@
 version: '2'
 services:
-    producer:
+    subscriber:
         build:
             context: ../..
             dockerfile: build/Dockerfile
             args:
-                service: simple-queue
+                service: pub-sub
         environment:
-            - MODE=producer
-            - MESSAGE=hello
-            - QUEUE=queue:simple-queue
+            - MODE=subscriber
+            - CHANNELS=channel:catto,channel:doggo
             - REDIS_ADDRESS=redis-node-0:6379,redis-node-1:6379,redis-node-2:6379,redis-node-3:6379,redis-node-4:6379,redis-node-5:6379
             - REDIS_PASSWORD=bitnami
         networks:

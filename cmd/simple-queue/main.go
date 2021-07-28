@@ -50,10 +50,8 @@ func main() {
 		producer.Produce(message)
 	} else {
 		consumer := simplequeue.New(redisAddress, redisPassword, queue)
-
 		for {
 			results := consumer.Consume(time.Duration(0))
-
 			log.Printf("[main]: message '%s' from queue '%s'\n", results[1], results[0])
 		}
 	}

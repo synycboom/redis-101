@@ -1,0 +1,34 @@
+version: '2'
+services:
+    doggo-publilsher:
+        build:
+            context: ../..
+            dockerfile: build/Dockerfile
+            args:
+                service: pub-sub
+        environment:
+            - MODE=publisher
+            - MESSAGE=hello-doggo
+            - CHANNELS=channel:doggo
+            - REDIS_ADDRESS=redis-node-0:6379,redis-node-1:6379,redis-node-2:6379,redis-node-3:6379,redis-node-4:6379,redis-node-5:6379
+            - REDIS_PASSWORD=bitnami
+        networks:
+        - redis-101_backend
+    catto-publilsher:
+        build:
+            context: ../..
+            dockerfile: build/Dockerfile
+            args:
+                service: pub-sub
+        environment:
+            - MODE=publisher
+            - MESSAGE=hello-catto
+            - CHANNELS=channel:catto
+            - REDIS_ADDRESS=redis-node-0:6379,redis-node-1:6379,redis-node-2:6379,redis-node-3:6379,redis-node-4:6379,redis-node-5:6379
+            - REDIS_PASSWORD=bitnami
+        networks:
+        - redis-101_backend
+
+networks:
+  redis-101_backend:
+    external: true
