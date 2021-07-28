@@ -20,27 +20,27 @@ var (
 func init() {
 	mode = os.Getenv("MODE")
 	if !(mode == "producer" || mode == "consumer") {
-		panic("MODE should be 'producer' or 'consumer'")
+		panic("[init]: MODE should be 'producer' or 'consumer'")
 	}
 
 	queue = os.Getenv("QUEUE")
 	if queue == "" {
-		panic("QUEUE is required")
+		panic("[init]: QUEUE is required")
 	}
 
 	message = os.Getenv("MESSAGE")
 	if mode == "producer" && message == "" {
-		panic("MESSAGE is required when using producer mode")
+		panic("[init]: MESSAGE is required when using producer mode")
 	}
 
 	redisPassword = os.Getenv("REDIS_PASSWORD")
 	if redisPassword == "" {
-		panic("REDIS_PASSWORD is required")
+		panic("[init]: REDIS_PASSWORD is required")
 	}
 
 	redisAddress = strings.Split(os.Getenv("REDIS_ADDRESS"), ",")
 	if len(redisAddress) == 0 {
-		panic("CLUSTER_ADDR is required")
+		panic("[init]: CLUSTER_ADDR is required")
 	}
 }
 

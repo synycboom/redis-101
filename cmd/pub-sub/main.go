@@ -18,27 +18,27 @@ var (
 func init() {
 	mode = os.Getenv("MODE")
 	if !(mode == "publisher" || mode == "subscriber") {
-		panic("MODE should be 'publisher' or 'subscriber'")
+		panic("[init]: MODE should be 'publisher' or 'subscriber'")
 	}
 
 	channels = strings.Split(os.Getenv("CHANNELS"), ",")
 	if len(channels) == 0 {
-		panic("CHANNELS is required")
+		panic("[init]: CHANNELS is required")
 	}
 
 	message = os.Getenv("MESSAGE")
 	if mode == "publisher" && message == "" {
-		panic("MESSAGE is required when using publisher mode")
+		panic("[init]: MESSAGE is required when using publisher mode")
 	}
 
 	redisPassword = os.Getenv("REDIS_PASSWORD")
 	if redisPassword == "" {
-		panic("REDIS_PASSWORD is required")
+		panic("[init]: REDIS_PASSWORD is required")
 	}
 
 	redisAddress = strings.Split(os.Getenv("REDIS_ADDRESS"), ",")
 	if len(redisAddress) == 0 {
-		panic("CLUSTER_ADDR is required")
+		panic("[init]: CLUSTER_ADDR is required")
 	}
 }
 

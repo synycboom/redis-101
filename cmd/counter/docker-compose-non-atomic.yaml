@@ -1,0 +1,19 @@
+version: '2'
+services:
+    non-atomic-counter:
+        build:
+            context: ../..
+            dockerfile: build/Dockerfile
+            args:
+                service: counter
+        environment:
+            - COUNTER_NAME=counter:non-atomic-counter
+            - IS_ATOMIC_COUNTER=false
+            - REDIS_ADDRESS=redis-node-0:6379,redis-node-1:6379,redis-node-2:6379,redis-node-3:6379,redis-node-4:6379,redis-node-5:6379
+            - REDIS_PASSWORD=bitnami
+        networks:
+        - redis-101_backend
+
+networks:
+  redis-101_backend:
+    external: true
